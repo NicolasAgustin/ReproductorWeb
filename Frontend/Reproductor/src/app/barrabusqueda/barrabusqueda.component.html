@@ -1,0 +1,5 @@
+<input type="text" (input)="buscar(valor)" #valor>
+
+<div *ngFor="let cancion of cancionesBuscadas">
+    {{cancion["rawTitulo"]}}
+</div>

@@ -18,6 +18,8 @@ public class ReprowebApplication {
 			System.out.println("Metodo onInit: Web Service deployed");
 			Cancion c1 = new Cancion("Genesis - Grimes", "C:\\Users\\Musica\\Genesis.mp3");
 			crepo.save(c1);
+			Cancion c2 = new Cancion("Idoru - Grimes", "C:\\Users\\Musica\\Idoru.mp3");
+			crepo.save(c2);
 		};
 	}
 
