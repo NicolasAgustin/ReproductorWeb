@@ -8,18 +8,28 @@ import java.util.List;
 public class RepService{
 
     @Autowired
-    private CancionRepo songRepo;
+    private CancionRepo cancionesRepo;
 
     public List<Cancion> getSongs(){
-        return songRepo.findAll();
+        return cancionesRepo.findAll();
     }
 
     public List<Cancion> getSongNames(String value){
-        return songRepo.findByTituloLike("%"+value+"%");
+        return cancionesRepo.findByTituloLike("%"+value+"%");
     }
 
     public List<Cancion> getSongName(String value){
-        return songRepo.findByTitulo(value);
+        return cancionesRepo.findByTitulo(value);
     }
 
+    public boolean guardarCancion(Cancion c) {
+        try {
+            c.setRawTitulo(c.getTitulo().toLowerCase());
+            cancionesRepo.save(c);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+            return false;
+        }
+    }
 }

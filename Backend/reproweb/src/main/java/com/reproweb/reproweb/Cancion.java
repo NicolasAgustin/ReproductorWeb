@@ -16,12 +16,14 @@ public class Cancion {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long Id;
-    private String titulo;
+    private String rawTitulo;
     private String path;
+    private String titulo;
 
     public Cancion(){ }
     public Cancion(String titulo, String path){
-        this.titulo = titulo;
+        this.titulo = titulo.toLowerCase();
+        this.rawTitulo = titulo;
         this.path = path;
     }
 }
