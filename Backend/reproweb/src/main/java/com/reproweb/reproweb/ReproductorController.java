@@ -1,14 +1,20 @@
 package com.reproweb.reproweb;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -44,6 +50,22 @@ public class ReproductorController {
         } else {
             System.out.println("Song " + received.getTitulo() + " not saved");
         }
+    }
+
+    @GetMapping(
+        value = "/getFile/{id}",
+        produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+        )
+    public @ResponseBody byte[] getFile(@PathVariable("id") Long id) throws IOException {
+
+        File audioFile = new File(rservice.getSongById(id).getPath());
+
+        System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
+
+        InputStream in = new FileInputStream(audioFile);
+
+        return in.readAllBytes();
+
     }
 
 }

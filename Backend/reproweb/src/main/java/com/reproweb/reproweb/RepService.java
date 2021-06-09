@@ -32,4 +32,9 @@ public class RepService{
             return false;
         }
     }
+
+    public Cancion getSongById(Long id){
+        return cancionesRepo.getById(id);
+    }
+
 }

@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListaCancionesComponent } from './lista-canciones/lista-canciones.component';
 import { BarrabusquedaComponent } from './barrabusqueda/barrabusqueda.component';
+import { MusicControllerComponent } from './musiccontroller/musiccontroller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaCancionesComponent,
-    BarrabusquedaComponent
+    BarrabusquedaComponent,
+    MusicControllerComponent
   ],
   imports: [
     BrowserModule,
