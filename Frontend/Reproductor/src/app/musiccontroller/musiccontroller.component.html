@@ -1,7 +1,39 @@
-<input type="text" placeholder="Insertar id" #id>
-<button (click)="cargar(id)">Cargar</button>
-<button (click)="parar()">Stop</button>
-<button (click)="reset()">Reset</button>
-<button (click)="play()">Play</button>
-<app-lista-canciones></app-lista-canciones>
-<app-barrabusqueda></app-barrabusqueda>
+
+<mat-grid-list cols="2" rowHeight="500px">
+    <!-- header -->
+    <mat-grid-tile colspan="2" class="header" > 
+        <app-barrabusqueda></app-barrabusqueda>
+        <input type="text" placeholder="Insertar id" #id>
+    </mat-grid-tile>
+    <!-- lista de canciones -->
+    <mat-grid-tile class="left">
+        <app-lista-canciones (clickedSong)="seleccionarCancion($event)"></app-lista-canciones>
+    </mat-grid-tile>
+    <!-- Contenido principal -->
+    <mat-grid-tile  class="right">
+        <img src="">
+        {{ titulo }}
+    </mat-grid-tile>
+    <!-- Controles -->
+    <mat-grid-tile colspan="2" class="footer">
+        <!-- <input type="range" min="0" max="1" [value]="currentT" id="myRange"> -->
+        <div id="progressbar-div">
+            <mat-progress-bar mode="determinate" [value]="currentT" class="progressbar" id="bar"></mat-progress-bar>
+        </div>
+        <div id="controles">
+            <button (click)="load(id)">Load</button>
+            <button (click)="pause()">Pause</button>
+            <button (click)="stop()">Stop</button>
+            <button (click)="play()">Play</button>
+        </div>
+        <div id="volume-div">
+            <!-- <mat-slider max="1" step="0.01" value="0.50" (input)="changeVolume($event)"></mat-slider> -->
+            <input type="range" id="volumeController" (input)="changeVolume($event)" max="1" value="0.50" step="0.01">
+        </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2" class="footer">
+        
+    </mat-grid-tile>
+    <!-- <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile> -->
+</mat-grid-list>

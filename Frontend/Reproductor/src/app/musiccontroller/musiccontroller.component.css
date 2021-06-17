@@ -1,0 +1,38 @@
+.header{
+    background-color: rgba(97, 0, 0, 0.856);
+}
+
+.footer{
+    background-color: rgba(97, 0, 0, 0.856);
+}
+
+.left{
+    background-color: rgba(187, 5, 5, 0.856);
+}
+
+.right{
+    background-color: rgba(187, 5, 5, 0.856);
+}
+
+.progressbar{
+    height: 10px;
+}
+
+#progressbar-div{
+    height: 50px;
+    width: 1500px;
+    color: rgb(156, 50, 255);
+    display: block;
+}
+
+#bar{
+    display: block;
+}
+
+#controles{
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+/*  */

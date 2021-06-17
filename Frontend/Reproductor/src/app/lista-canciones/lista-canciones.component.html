@@ -1,8 +1,14 @@
 
-<div *ngFor="let cancion of canciones; let i=index">
-    <ul >
-        <li> {{cancion['titulo'] }} </li>
-    </ul>
-</div>
+<!-- <button (click)="update()">
+    Update
+</button> -->
 
-<button>Actualizar</button> 
+
+<mat-action-list class="scroll">    
+    <button mat-list-item *ngFor="let cancion of canciones; let i=index" (click)="onSelect(cancion['id'])" class="item">
+        {{cancion['titulo']}}
+    </button>  
+    <mat-divider [inset]="true"></mat-divider>
+</mat-action-list>
+
+<!-- <button>Actualizar</button>  -->

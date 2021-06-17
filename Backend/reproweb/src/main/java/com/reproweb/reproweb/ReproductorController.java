@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -58,7 +59,11 @@ public class ReproductorController {
         )
     public @ResponseBody byte[] getFile(@PathVariable("id") Long id) throws IOException {
 
-        File audioFile = new File(rservice.getSongById(id).getPath());
+        Optional<Cancion> cancionResult = rservice.getSongById(id);
+
+        Cancion tmp = cancionResult.get();
+
+        File audioFile = new File(tmp.getPath());
 
         System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
 
@@ -66,6 +71,12 @@ public class ReproductorController {
 
         return in.readAllBytes();
 
+    }
+
+    @GetMapping("/getSong/{id}")
+    public Cancion getSongById(@PathVariable("id") Long id){
+        Optional<Cancion> result = rservice.getSongById(id);
+        return result.get();
     }
 
 }

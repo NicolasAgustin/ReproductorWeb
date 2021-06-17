@@ -1,0 +1,3 @@
+1) Agregar un servicio web para consultar la API de google images y obtener una imagen que coincida con el titulo de la cancion
+2) Hacer la barra de progreso drageable
+3) Implementar un buen diseño de layout

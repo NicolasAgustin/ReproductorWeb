@@ -21,9 +21,13 @@ export class ReqCancionesService {
     return this.http.get<Cancion>(this.url)
       .pipe(
         tap( () => {
-          this.refresh$.next();
+          //this.refresh$.next();
         })
       )
+  }
+
+  public updateList(){
+    this.refresh$.next();
   }
 
   public obtenerCancionLike(titulo: string){
@@ -32,6 +36,10 @@ export class ReqCancionesService {
 
   public obtenerCancion(id: number){
     return this.http.get(this.url + '/getFile/' + id, { responseType: "blob" });
+  }
+
+  public obtenerDatosCancion(id: number){
+    return this.http.get<Cancion>(this.url + '/getSong/' + id);
   }
 
 }

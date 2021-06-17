@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Cancion } from '../cancion';
 import { ReqCancionesService } from '../req-canciones.service';
@@ -9,6 +9,9 @@ import { ReqCancionesService } from '../req-canciones.service';
   styleUrls: ['./lista-canciones.component.css']
 })
 export class ListaCancionesComponent implements OnInit {
+
+  @Output()
+  clickedSong: EventEmitter<number> = new EventEmitter<number>();
 
   canciones: Cancion[];
   mostrado = false;
@@ -26,9 +29,19 @@ export class ListaCancionesComponent implements OnInit {
     });
   }
 
+  update(){
+    this.rcservice.updateList();
+  }
+
+  onSelect(id: string){
+    console.log('En metodo cancionClickeada');
+    this.clickedSong.emit(Number(id));
+  }
+
   obtenerLista() {
     this.rcservice.obtenerCanciones().subscribe( (datos: any) => {
-      this.canciones = datos;      
+      this.canciones = datos;
+      console.log('Updated list');      
     });
   }
 

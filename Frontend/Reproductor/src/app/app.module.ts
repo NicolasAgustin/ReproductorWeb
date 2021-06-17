@@ -7,6 +7,13 @@ import { AppComponent } from './app.component';
 import { ListaCancionesComponent } from './lista-canciones/lista-canciones.component';
 import { BarrabusquedaComponent } from './barrabusqueda/barrabusqueda.component';
 import { MusicControllerComponent } from './musiccontroller/musiccontroller.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatDividerModule } from '@angular/material/divider';
+import {MatSliderModule} from '@angular/material/slider';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -18,7 +25,13 @@ import { MusicControllerComponent } from './musiccontroller/musiccontroller.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatGridListModule,
+    MatDividerModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

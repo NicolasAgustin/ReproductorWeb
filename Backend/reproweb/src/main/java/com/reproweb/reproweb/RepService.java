@@ -3,6 +3,7 @@ package com.reproweb.reproweb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RepService{
@@ -33,8 +34,8 @@ public class RepService{
         }
     }
 
-    public Cancion getSongById(Long id){
-        return cancionesRepo.getById(id);
+    public Optional<Cancion> getSongById(Long id){
+        return cancionesRepo.findById(id);
     }
 
 }
