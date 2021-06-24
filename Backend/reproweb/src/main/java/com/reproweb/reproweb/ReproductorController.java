@@ -58,16 +58,25 @@ public class ReproductorController {
         produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
         )
     public @ResponseBody byte[] getFile(@PathVariable("id") Long id) throws IOException {
+        InputStream in = null;
+        try{
+            Optional<Cancion> cancionResult = rservice.getSongById(id);
 
-        Optional<Cancion> cancionResult = rservice.getSongById(id);
+            Cancion tmp = cancionResult.get();
 
-        Cancion tmp = cancionResult.get();
+            File audioFile = new File(tmp.getPath());
 
-        File audioFile = new File(tmp.getPath());
+            System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
 
-        System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
-
-        InputStream in = new FileInputStream(audioFile);
+            in = new FileInputStream(audioFile);
+        }catch(Exception e){
+            
+        } finally {
+            if(in != null){
+                in.close();
+            }
+        }
+        
 
         return in.readAllBytes();
 
