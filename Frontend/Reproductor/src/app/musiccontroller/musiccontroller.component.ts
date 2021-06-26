@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Cancion } from '../cancion';
 import { ReqCancionesService } from '../req-canciones.service';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatSliderChange } from '@angular/material/slider';
+import { MatSliderChange, MatSlider } from '@angular/material/slider';
 
 @Component({
   selector: 'app-musiccontroller',
@@ -17,8 +17,9 @@ export class MusicControllerComponent implements OnInit {
   public currentT: number;
   private currentSong: Cancion;
   private nextId: number;
-
-
+  public playing: boolean;
+  private volumen: number;
+  private cantidadCanciones: number;
 
   constructor(private rcservice: ReqCancionesService) {
     this.archivoUrl = '';
@@ -27,6 +28,15 @@ export class MusicControllerComponent implements OnInit {
     this.currentSong = {titulo: '', rawTitulo: '', path: '', id: ''};
     this.nextId = 1;
     this.currentT = 0;
+    this.playing = false;
+    this.volumen = 0.50;
+    this.cantidadCanciones = 0;
+
+    this.rcservice.obtenerCanciones().subscribe((data: any) => {
+      this.cantidadCanciones = data.length;
+      console.log('cantidad de canciones: ' + this.cantidadCanciones);
+    });
+
   }
 
   ngOnInit(): void {
@@ -79,10 +89,13 @@ export class MusicControllerComponent implements OnInit {
         this.currentSong = data;
         this.titulo = 'playing ' + this.currentSong['rawTitulo'];
       });
-      this.audio.volume = Number((document.getElementById("volumeController") as HTMLInputElement).value);
-      this.audio.play();
+      this.audio.volume = this.volumen;
+      this.playing = false;
+      this.changeState();
       this.addEventListeners();
-      this.nextId = this.nextId + 1;
+
+      if(this.nextId < this.cantidadCanciones) this.nextId = this.nextId + 1; else this.nextId = 1;
+      
       console.log(this.nextId);
     });
   }
@@ -96,11 +109,11 @@ export class MusicControllerComponent implements OnInit {
     // this.audio.addEvent
   }
 
-  changeVolume(e: Event){
-    let volume = (e.target as HTMLInputElement).value;
-    // let volume = e.value;
-    console.log('volumen: ' + volume);
-    this.audio.volume = Number(volume);
+  changeVolume(e: MatSliderChange){
+    let newVolume = e.value;
+    if(typeof newVolume === 'number') this.volumen = newVolume;
+    // console.log('volumen: ' + this.volumen);
+    this.audio.volume = this.volumen;
   }
 
   updateProgress(){
@@ -119,6 +132,17 @@ export class MusicControllerComponent implements OnInit {
     this.audio.play();
   }
 
+  changeState(){
+    if (this.playing){
+      this.audio.pause();
+      this.playing = false;
+    }  else {
+      this.audio.play();
+      this.playing = true;
+    }
+    
+    // this.playing = evento;
+  }
 
   getAudioTime(): number {
     return this.audio.currentTime;
@@ -131,6 +155,11 @@ export class MusicControllerComponent implements OnInit {
 
   seleccionarCancion(valor: number){
     this.load2(valor);
+    // this.changeState()
+  }
+
+  nextSong(){
+    this.load2(this.nextId);
   }
 
 }

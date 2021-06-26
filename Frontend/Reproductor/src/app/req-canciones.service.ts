@@ -13,17 +13,12 @@ export class ReqCancionesService {
   private url: string;
 
   constructor(private http: HttpClient) {
-    //this.url = 'http://localhost:8080/canciones';
+    // this.url = 'http://localhost:8080/canciones';
     this.url = 'http://192.168.0.110:8080/canciones';
   }
 
   public obtenerCanciones(): Observable<Cancion>{
-    return this.http.get<Cancion>(this.url)
-      .pipe(
-        tap( () => {
-          //this.refresh$.next();
-        })
-      )
+    return this.http.get<Cancion>(this.url);
   }
 
   public updateList(){

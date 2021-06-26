@@ -69,17 +69,15 @@ public class ReproductorController {
             System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
 
             in = new FileInputStream(audioFile);
+
+            return in.readAllBytes();
         }catch(Exception e){
-            
+            return null;
         } finally {
             if(in != null){
                 in.close();
             }
         }
-        
-
-        return in.readAllBytes();
-
     }
 
     @GetMapping("/getSong/{id}")

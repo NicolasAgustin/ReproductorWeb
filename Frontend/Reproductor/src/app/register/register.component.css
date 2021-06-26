@@ -1,15 +1,18 @@
-.example-form {
-    min-width: 150px;
+mat-card {
     max-width: 500px;
-    width: 100%;
-  }
-  
-.example-full-width {
-    width: 100%;
+    max-height: 500px;
+    height: 300px;
+    margin: 2em auto;
+    text-align: center;
+    background-color: rgb(30, 79, 153);
 }
 
-::ng-deep .mat-form-field-label {
-    color: white !important;
+.titulo{
+    color: aliceblue;
+}
+
+mat-form-field {
+    display: block;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

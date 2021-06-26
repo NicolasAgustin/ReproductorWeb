@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    size: 500px;
+    background: url(https://wallpapertag.com/wallpaper/full/0/1/2/892445-free-download-music-background-image-3840x2160-hd-1080p.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-y: hidden;
+}
+body { margin: 25px; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
