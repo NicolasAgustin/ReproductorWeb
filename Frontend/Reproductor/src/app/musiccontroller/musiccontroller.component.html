@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-title>
+        <app-barrabusqueda (cancionSeleccionada)="seleccionarCancion($event)"></app-barrabusqueda>
+        <!-- <input type="text" placeholder="Insertar id" #id> -->
+    </mat-card-title>
+    <mat-card-content>
+        <app-lista-canciones (clickedSong)="seleccionarCancion($event)"></app-lista-canciones>
+        <!-- "imagen" -->
+    </mat-card-content>
+    <mat-card-actions>
+        <div id="progressbar-div" fxLayout="row" fxLayoutAlign="center">
+            <mat-progress-bar mode="determinate" [value]="currentT" class="progressbar" id="bar"></mat-progress-bar>
+        </div>
+        <!-- CONTROLES -->
+        <div fxLayout="row" fxLayoutAlign="center" class="controles">
+            <!-- <button mat-fab (click)="load(id)" color="primary" style="margin: 10px;">Load</button> -->
+            <button mat-fab (click)="stop()" color="primary" class="control">
+                <mat-icon>stop</mat-icon>
+            </button>
+
+            <button mat-fab (click)="null" color="primary" class="control">
+                <mat-icon>skip_previous</mat-icon>
+            </button>
+
+            <button mat-fab (click)="changeState()" color="primary" class="control">
+                <mat-icon *ngIf="!playing">play_arrow</mat-icon>
+                <mat-icon *ngIf="playing">pause</mat-icon>
+            </button>
+
+            <button mat-fab (click)="nextSong()" color="primary" class="control">
+                <mat-icon>skip_next</mat-icon>
+            </button>
+
+            <!-- <button mat-fab (click)="pause()">
+                <mat-icon>pause</mat-icon>
+            </button>
+            <button mat-fab (click)="play()">
+                <mat-icon>play_arrow</mat-icon>
+            </button> -->
+            <div style="padding: 20px">
+                <mat-slider max="1" step="0.01" value="0.50" id="volume-slider" (input)="changeVolume($event)"></mat-slider>
+            </div>
+            
+            
+            <!-- <input type="range" id="volumeController" (input)="changeVolume($event)" max="1" value="0.50" step="0.01"> -->
+        </div>
+    </mat-card-actions>
+</mat-card>

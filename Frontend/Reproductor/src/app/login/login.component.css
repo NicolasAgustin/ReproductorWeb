@@ -1,0 +1,31 @@
+mat-card {
+    max-width: 500px;
+    max-height: 500px;
+    height: 300px;
+    margin: 2em auto;
+    text-align: center;
+    background-color: rgb(30, 79, 153);
+}
+
+.text{
+    color:aliceblue;
+}
+
+mat-form-field {
+    display: block;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: white !important;
+}
+  
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: white !important;
+} 
+  
+::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: white !important;;
+}
