@@ -1,48 +1,52 @@
 <mat-card>
     <mat-card-title>
         <app-barrabusqueda (cancionSeleccionada)="seleccionarCancion($event)"></app-barrabusqueda>
-        <!-- <input type="text" placeholder="Insertar id" #id> -->
     </mat-card-title>
-    <mat-card-content>
-        <app-lista-canciones (clickedSong)="seleccionarCancion($event)"></app-lista-canciones>
-        <!-- "imagen" -->
+    <mat-card-content style="margin-bottom: 5px;">
+        <mat-divider [inset]="true"></mat-divider> 
+        <div fxLayout="row">
+            <div>
+                <app-lista-canciones (clickedSong)="seleccionarCancion($event)" [focusOnSelect$]="selected$"></app-lista-canciones>
+            </div>
+
+            <div class="albumart-div">
+                <span class="helper"></span>
+                <img [src]="imageUrl" class="albumart">
+            </div>
+        </div>
+        
+        <mat-divider [inset]="true"></mat-divider> 
     </mat-card-content>
     <mat-card-actions>
-        <div id="progressbar-div" fxLayout="row" fxLayoutAlign="center">
-            <mat-progress-bar mode="determinate" [value]="currentT" class="progressbar" id="bar"></mat-progress-bar>
+        <mat-card-title>
+            <div class="tituloSeleccionado">
+                <p class="tituloCancion">{{titulo}}</p>
+            </div>
+        </mat-card-title>
+        <div class="progressbar-div" fxLayout="row" fxLayoutAlign="center">
+            <p class="left">{{timeStatus}}</p>
+            <mat-slider min="0" [max]="audio.duration" step="0.01" [value]="audio.currentTime" class="progressbar" (input)="updateTime($event)"></mat-slider>
+            <p class="right">{{totalTime}}</p>
         </div>
         <!-- CONTROLES -->
         <div fxLayout="row" fxLayoutAlign="center" class="controles">
-            <!-- <button mat-fab (click)="load(id)" color="primary" style="margin: 10px;">Load</button> -->
-            <button mat-fab (click)="stop()" color="primary" class="control">
+            <button mat-fab (click)="stop()" class="control">
                 <mat-icon>stop</mat-icon>
             </button>
-
-            <button mat-fab (click)="null" color="primary" class="control">
+            <button mat-fab (click)="previousSong()" class="control">
                 <mat-icon>skip_previous</mat-icon>
             </button>
-
-            <button mat-fab (click)="changeState()" color="primary" class="control">
+            <button mat-fab (click)="changeState()" class="control">
                 <mat-icon *ngIf="!playing">play_arrow</mat-icon>
                 <mat-icon *ngIf="playing">pause</mat-icon>
             </button>
-
-            <button mat-fab (click)="nextSong()" color="primary" class="control">
+            <button mat-fab (click)="nextSong()" class="control">
                 <mat-icon>skip_next</mat-icon>
             </button>
-
-            <!-- <button mat-fab (click)="pause()">
-                <mat-icon>pause</mat-icon>
-            </button>
-            <button mat-fab (click)="play()">
-                <mat-icon>play_arrow</mat-icon>
-            </button> -->
+            <!-- llevar a archivo css -->
             <div style="padding: 20px">
-                <mat-slider max="1" step="0.01" value="0.50" id="volume-slider" (input)="changeVolume($event)"></mat-slider>
+                <mat-slider max="1" step="0.01" value="0.50" class="volumeslider" (input)="changeVolume($event)"></mat-slider>
             </div>
-            
-            
-            <!-- <input type="range" id="volumeController" (input)="changeVolume($event)" max="1" value="0.50" step="0.01"> -->
         </div>
     </mat-card-actions>
 </mat-card>

@@ -23,11 +23,6 @@ public class ReprowebApplication {
 				System.out.println("Saved " + c.getRawTitulo());
 				crepo.save(c);
 			}
-			// System.out.println("Metodo onInit: Web Service deployed");
-			// Cancion c1 = new Cancion("Pictures of you - The cure", "C:\\Users\\Nico\\Desktop\\Musica\\Pictures.mp3");
-			// crepo.save(c1);
-			// Cancion c2 = new Cancion("Dancing with myself - Billy Idol", "C:\\Users\\Nico\\Desktop\\Musica\\Dancing.mp3");
-			// crepo.save(c2);
 		};
 	}
 

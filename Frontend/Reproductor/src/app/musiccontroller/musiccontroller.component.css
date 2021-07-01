@@ -1,28 +1,65 @@
-.header{
-    background-color: rgba(97, 0, 0, 0.856);
-}
-
-.footer{
-    background-color: rgba(97, 0, 0, 0.856);
-}
-
 .left{
-    background-color: rgba(187, 5, 5, 0.856);
+    float: left;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: aliceblue;
+    padding-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.albumart-div{
+    text-align: center;
+    width: 100%;
+    height: inherit;
+    background-color: rgba(14, 32, 58, 0.198);
+}
+
+.helper{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.albumart{
+    width: 55%;
+    margin: auto;
+    margin-top: auto;
+    vertical-align: middle;
+}
+
+.tituloCancion{
+    text-align: left;
+    color: aliceblue;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.tituloSeleccionado{
+    background: rgba(14, 32, 58, 0.198);
 }
 
 .right{
-    background-color: rgba(187, 5, 5, 0.856);
+    float: right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 10px;
+    color: aliceblue;
 }
 
 .progressbar{
-    height: 10px;
+    margin-top: 0;
+    width: 1795px;
 }
 
-#progressbar-div{
-    height: 50px;
-    width: 1500px;
-    color: rgb(156, 50, 255);
-    display: block;
+.progressbar-div{
+    height: auto;
+    width: auto;
+    overflow: hidden;
+    /* color: rgb(156, 50, 255); */
+    /* text-align: center; */
 }
 
 #bar{
@@ -33,7 +70,7 @@
     height: 50px;
     width: auto;
     display: block;
-    margin: 10px;
+    margin: 5px;
     height: auto;
 }
 
@@ -43,10 +80,11 @@
 }
 
 .control{
-    width: 65px;
+    width: 75px;
     height: auto;
     margin: 15px;
     padding: 10px;
+    background-color: aliceblue;
 }
 
 mat-icon {
@@ -67,8 +105,20 @@ mat-card-title{
 }
 
 
-mat-slider{
+.volumeslider{
     width: 300px;
+    height: 60px;
     margin-top: 5px;
-    
+}
+
+::ng-deep .mat-slider-thumb {
+	background-color: aliceblue !important;
+}
+
+::ng-deep .mat-slider-thumb-label {
+	background-color: #d6d6d6 !important;
+}
+
+::ng-deep .mat-slider-track-fill {
+	background-color: aliceblue !important;
 }

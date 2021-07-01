@@ -25,6 +25,10 @@ export class ReqCancionesService {
     this.refresh$.next();
   }
 
+  public obtenerImagen(id: number){
+    return this.http.get(this.url + '/getFile/meta/' + id, {responseType: 'blob'});
+  }
+
   public obtenerCancionLike(titulo: string){
     return this.http.get<Cancion>(this.url + '/buscar/' + titulo);
   }

@@ -25,4 +25,19 @@ public class RegistroController {
         }
     }
 
+    @PostMapping("/login")
+    public void loginUser(@RequestBody UserLoginRequest user){
+        System.out.println("username:" + user.getEmail() + " password:" + user.getPassword());
+        Usuario userFound = rservice.getUserByEmail(user.getEmail());
+        if(userFound != null) {
+            if(userFound.getPassword().equals(user.getPassword())){
+                System.out.println("Logeo con exito");
+            } else {
+                System.out.println("Contrasena incorrecta");
+            }
+        } else {
+            System.out.println("User not found");
+        }
+    }
+
 }

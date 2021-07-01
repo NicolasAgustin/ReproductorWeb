@@ -7,6 +7,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,31 +58,39 @@ public class ReproductorController {
         }
     }
 
-    @GetMapping(
-        value = "/getFile/{id}",
-        produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
-        )
+    @GetMapping(value = "/getFile/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] getFile(@PathVariable("id") Long id) throws IOException {
         InputStream in = null;
         try{
             Optional<Cancion> cancionResult = rservice.getSongById(id);
-
             Cancion tmp = cancionResult.get();
-
             File audioFile = new File(tmp.getPath());
-
             System.out.println("Metodo getFile" + audioFile.getAbsolutePath());
-
             in = new FileInputStream(audioFile);
-
             return in.readAllBytes();
-        }catch(Exception e){
+        } catch(Exception e) {
             return null;
         } finally {
-            if(in != null){
-                in.close();
-            }
+            if(in != null) in.close();
         }
+    }
+
+    @GetMapping(value = "/getFile/meta/{id}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
+    public @ResponseBody byte[] getMetadata(@PathVariable("id") Long id) throws IOException, UnsupportedTagException, InvalidDataException {
+        System.out.println("Metodo para obetener metadata");
+        Optional<Cancion> cancionResult = rservice.getSongById(id);
+        Cancion tmp = cancionResult.get();
+        byte[] imageData = null;
+	    Mp3File metadata = new Mp3File(tmp.getPath());
+		if (metadata.hasId3v2Tag()){	
+			// Obtenemos los tags
+			ID3v2 id3v2tag = metadata.getId3v2Tag();
+			// Extraemos los bytes correspondientes a la imagen 
+			imageData = id3v2tag.getAlbumImage();
+		} else {
+			System.out.println("El archivo no posee album cover");
+		}
+        return imageData;
     }
 
     @GetMapping("/getSong/{id}")

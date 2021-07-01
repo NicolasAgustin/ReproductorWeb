@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Cancion } from '../cancion';
 import { ReqCancionesService } from '../req-canciones.service';
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
@@ -11,6 +11,12 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./barrabusqueda.component.css']
 })
 export class BarrabusquedaComponent implements OnInit {
+
+  @ViewChild('formulario', {static: true}) barraBusqueda!: HTMLFormElement;
+
+  ngAfterViewInit(){
+  
+  }
 
   public cancionesBuscadas: Cancion[];
   public open: boolean;
@@ -41,19 +47,16 @@ export class BarrabusquedaComponent implements OnInit {
     }
   }
 
-  clickinbarra(){
-    console.log('se clickeo la barra');
-  }
-
   seleccionar(evento: Event) {
     console.log('evento: ' + evento.target);
     // this.cancionSeleccionada.emit(Number(evento.target));
   }
 
-  emitir(evento: MatAutocompleteSelectedEvent){
-    console.log(evento.option.value)
+  emitir(evento: MatAutocompleteSelectedEvent, barra: HTMLInputElement){
+    console.log('Barra de busqueda, opcion: ' + evento.option.value)
     this.idSelected = Number(evento.option.value);
     this.cancionSeleccionada.emit(this.idSelected);
+    barra.value = '';
   }
 
 }

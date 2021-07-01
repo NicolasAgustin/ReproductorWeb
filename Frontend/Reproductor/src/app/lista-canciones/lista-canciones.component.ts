@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, ViewChild, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { MatListOption, MatSelectionList, MatSelectionListChange } from '@angular/material/list';
+import { Subject, Subscription } from 'rxjs';
 import { Cancion } from '../cancion';
 import { ReqCancionesService } from '../req-canciones.service';
 
@@ -8,18 +9,29 @@ import { ReqCancionesService } from '../req-canciones.service';
   templateUrl: './lista-canciones.component.html',
   styleUrls: ['./lista-canciones.component.css']
 })
-export class ListaCancionesComponent implements OnInit {
+export class ListaCancionesComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('cancionesLista', { static: true }) seleccion!: MatSelectionList;
+
+  ngAfterViewInit(){}
 
   @Output()
   clickedSong: EventEmitter<number> = new EventEmitter<number>();
+  @Output()
+  listaOpciones: EventEmitter<QueryList<MatListOption>>;
+  public evento: EventEmitter<MatSelectionListChange> = new EventEmitter<MatSelectionListChange>();
 
   canciones: Cancion[];
   mostrado = false;
+  @Input()
+  public focusOnSelect$: Subject<number>;
   obs$: Subscription;
 
   constructor(private rcservice: ReqCancionesService) {
     this.canciones = [];
     this.obs$ = new Subscription();
+    this.focusOnSelect$ = new Subject();
+    this.listaOpciones = new EventEmitter<QueryList<MatListOption>>();
   }
 
   ngOnInit(): void {
@@ -27,6 +39,12 @@ export class ListaCancionesComponent implements OnInit {
     this.obs$ = this.rcservice.refresh$.subscribe( () => {
       this.obtenerLista();
     });
+
+    this.focusOnSelect$.subscribe((option: number, ) => {
+      let qOptList = this.seleccion.options.get(option);
+      if(typeof qOptList != 'undefined') this.seleccion.selectedOptions.select(qOptList);
+    });
+
   }
 
   update(){
@@ -44,5 +62,20 @@ export class ListaCancionesComponent implements OnInit {
       console.log('Updated list');      
     });
   }
+
+  mouseHover(marquee: HTMLMarqueeElement){
+    marquee.setAttribute('scrollamount', '5');
+  }
+
+  mouseOut(marquee: HTMLMarqueeElement){
+    // console.log('hola');
+    // marquee.loop = 1;
+    // marquee.onfinish((elemento, evento) => {
+    //   elemento.stop();
+    // });
+    // marquee.setAttribute('scrollamount', '0');
+    // marquee.start();
+  }
+
 
 }

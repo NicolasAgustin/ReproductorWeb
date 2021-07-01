@@ -1,13 +1,5 @@
-
-<!-- <button (click)="update()">
-    Update
-</button> -->
-
-<mat-action-list class="scroll">    
-    <button mat-list-item *ngFor="let cancion of canciones; let i=index" (click)="onSelect(cancion['id'])" class="item">
-        {{cancion['titulo']}}
-    </button>  
-    <mat-divider [inset]="true"></mat-divider>
-</mat-action-list>
-
-<!-- <button>Actualizar</button>  -->
+<mat-selection-list #cancionesLista [multiple]="false" class="scroll">
+    <mat-list-option *ngFor="let cancion of canciones; let i = index" [value]="cancion" #seleccion (click)="onSelect(cancion['id'])" >
+        <p class="item">{{cancion['rawTitulo'].split('.')[0]}}</p>
+    </mat-list-option>
+</mat-selection-list>

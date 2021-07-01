@@ -1,24 +1,11 @@
-<!-- <input type="text" (input)="buscar(valor)" (click)="open = !open" #valor/>
-
-<div *ngFor="let cancion of cancionesBuscadas">
-    {{cancion["rawTitulo"]}}
-</div> -->
-
-<form class="example-form">
+<form class="example-form" #formulario>
   <mat-form-field class="example-full-width" appearance="fill" >
     <mat-label>Buscar</mat-label>
-    <input type="text" placeholder="Titulo" aria-label="Titulo" matInput [formControl]="searchbar" (input)="buscar()" [matAutocomplete]="canciones">
-    <mat-autocomplete autoActiveFirstOption #canciones="matAutocomplete" (optionSelected)="emitir($event)">
+    <input type="text" #barraBusqueda placeholder="Titulo" aria-label="Titulo" matInput [formControl]="searchbar" (input)="buscar()" [matAutocomplete]="canciones">
+    <mat-autocomplete autoActiveFirstOption #canciones="matAutocomplete" (optionSelected)="emitir($event, barraBusqueda)">
       <mat-option *ngFor="let cancion of cancionesBuscadas" [value]="cancion['id']">
-        {{cancion['titulo']}}
+        {{cancion['rawTitulo'].split('.')[0]}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </form>
-
-<!-- <ng-template cdk-connected-overlay [cdkConnectedOverlayOrigin]="overlayOrigin" [width]="500" hasBackdrop [open]="isMenuOpen"
-  (backdropClick)="open=false">
-  <div style="background-color: mediumpurple" >
-    This is the menu panel.
-  </div>
-</ng-template> -->
