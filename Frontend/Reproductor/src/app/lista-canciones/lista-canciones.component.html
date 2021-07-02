@@ -1,5 +1,7 @@
-<mat-selection-list #cancionesLista [multiple]="false" class="scroll">
-    <mat-list-option *ngFor="let cancion of canciones; let i = index" [value]="cancion" #seleccion (click)="onSelect(cancion['id'])" >
-        <p class="item">{{cancion['rawTitulo'].split('.')[0]}}</p>
-    </mat-list-option>
-</mat-selection-list>
+<div class="scroll">
+    <mat-selection-list #cancionesLista [multiple]="false">
+        <mat-list-option *ngFor="let cancion of canciones; let i = index" [value]="cancion" #seleccion (click)="onSelect(cancion['id'])" >
+            <p class="item">{{cancion['rawTitulo'].split('.')[0]}}</p>
+        </mat-list-option>
+    </mat-selection-list>
+</div>

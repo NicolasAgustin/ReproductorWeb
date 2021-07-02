@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.label {
+    font-size: 30px;
+}
+
 ::ng-deep .mat-form-field-label {
     color: white !important;
 }

@@ -5,6 +5,16 @@
     overflow-x: hidden;
 }
 
+.scroll::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgb(30, 79, 153);
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background-color: aliceblue;
+  }
+
 .item{
     color:white;
 }

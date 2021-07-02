@@ -15,9 +15,33 @@ mat-form-field {
     display: block;
 }
 
+/* ::ng-deep .mat-form-field {
+    .mat-input-element {
+        color: slategray;
+    }
+    .mat-form-field-label {
+        color: slategray;
+    }
+    .mat-form-field-underline {
+        background-color: slategray;
+    }
+    .mat-form-field-ripple {
+        background-color: slategray;
+    }
+    .mat-form-field-required-marker {
+        color: slategray;
+    }
+} */
+
+::ng-deep .mat-form-field .mat-form-field-label {
+    color: white;
+    font-size: 15px;
+}
+
 ::ng-deep .mat-focused .mat-form-field-label {
     /*change color of label*/
     color: white !important;
+    font-size: 20px;
 }
   
 ::ng-deep.mat-form-field-underline {
@@ -28,4 +52,8 @@ mat-form-field {
 ::ng-deep.mat-form-field-ripple {
    /*change color of underline when focused*/
    background-color: white !important;;
+}
+
+::ng-deep .mat-form-field-required-marker {
+    color: white;
 }

@@ -35,7 +35,7 @@ public class AuthenticationController {
     @PostMapping("/login")
 	public ResponseEntity<?> generateAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-		System.out.println("En generateAuthenticationToken");
+		System.out.println("En generateAuthenticationToken: " + authenticationRequest.getEmail() + " " + authenticationRequest.getPassword());
 
 		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 
@@ -51,15 +51,16 @@ public class AuthenticationController {
 
 		System.out.println("En register");
 
-		// if(regService.saveUser(newUser)) return ResponseEntity.
 		regService.saveUser(newUser);
 
 		final UserDetails userDetails = jwtInMemoryUserDetailsService.createUser(newUser);
 		final String token = jwtTokenUtil.generateToken(userDetails);
+	
 		return ResponseEntity.ok(new JwtResponse(token)); 
 	}
 
 	private void authenticate(String email, String password) throws Exception {
+		System.out.println("authenticate -> email: " + email + " password: " + password);
 		Objects.requireNonNull(email);
 		Objects.requireNonNull(password);
 		try {

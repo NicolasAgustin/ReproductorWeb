@@ -23,14 +23,11 @@ public class JwtUserDetailService implements UserDetailsService {
 
         Usuario u = urepo.findByEmail(email);
 
-		if(u != null){
-			if (u.getEmail().equals(email)) {
-				return new User(u.getEmail(), passwordEncoder.encode(u.getPassword()), new ArrayList<>());
-			} else {
-				throw new UsernameNotFoundException("User not found with email: " + email);
-			}
+		if (u != null) {
+			return new User(u.getEmail(), passwordEncoder.encode(u.getPassword()), new ArrayList<>());
+		} else {
+			throw new UsernameNotFoundException("User not found with email: " + email);
 		}
-		return null;
 		// "$2a$04$tGp/Dh2vD6GzX33hy0g/4.24g9ssaX7x1jKmgR/noCpmQdIIyDR4G"
 	}
 

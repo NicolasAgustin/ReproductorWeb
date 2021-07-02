@@ -13,7 +13,12 @@ mat-card {
 
 mat-form-field {
     display: block;
-    padding: 10px;
+    padding: 5px;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label {
+    color: white;
+    font-size: 15px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {
@@ -30,4 +35,8 @@ mat-form-field {
 ::ng-deep.mat-form-field-ripple {
    /*change color of underline when focused*/
    background-color: white !important;;
+}
+
+::ng-deep .mat-form-field-required-marker {
+    color: white;
 }

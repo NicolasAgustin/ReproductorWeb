@@ -1,6 +1,6 @@
 <form class="example-form" #formulario>
   <mat-form-field class="example-full-width" appearance="fill" >
-    <mat-label>Buscar</mat-label>
+    <mat-label class="label">Buscar</mat-label>
     <input type="text" #barraBusqueda placeholder="Titulo" aria-label="Titulo" matInput [formControl]="searchbar" (input)="buscar()" [matAutocomplete]="canciones">
     <mat-autocomplete autoActiveFirstOption #canciones="matAutocomplete" (optionSelected)="emitir($event, barraBusqueda)">
       <mat-option *ngFor="let cancion of cancionesBuscadas" [value]="cancion['id']">

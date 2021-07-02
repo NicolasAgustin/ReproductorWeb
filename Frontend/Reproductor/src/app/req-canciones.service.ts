@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Cancion } from './cancion';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ReqCancionesService {
 
   constructor(private http: HttpClient) {
     // this.url = 'http://localhost:8080/canciones';
-    this.url = 'http://192.168.0.110:8080/canciones';
+    this.url = environment.base + 'canciones';
   }
 
   public obtenerCanciones(): Observable<Cancion>{
