@@ -2,28 +2,40 @@ package com.reproweb.reproweb;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.security.core.userdetails.User;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-// @Service
-// public class JwtUserDetailService implements UserDetailsService {
+@Service
+public class JwtUserDetailService implements UserDetailsService {
     
-//     @Autowired
-//     private UsuariosRepo urepo;
+    @Autowired
+    private UsuariosRepo urepo;
 
-//     @Override
-//     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-//         Usuario u = urepo.findByUsername(username);
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-// 		if (u.getUsername().equals(username)) {
-// 			return new User("techgeeknext", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",new ArrayList<>());
-// 		} else {
-// 			throw new UsernameNotFoundException("User not found with username: " + username);
-// 		}
-// 	}
+        Usuario u = urepo.findByEmail(email);
 
-// }
+		if(u != null){
+			if (u.getEmail().equals(email)) {
+				return new User(u.getEmail(), passwordEncoder.encode(u.getPassword()), new ArrayList<>());
+			} else {
+				throw new UsernameNotFoundException("User not found with email: " + email);
+			}
+		}
+		return null;
+		// "$2a$04$tGp/Dh2vD6GzX33hy0g/4.24g9ssaX7x1jKmgR/noCpmQdIIyDR4G"
+	}
+
+	public UserDetails createUser(Usuario user) {
+		return new User(user.getEmail(), passwordEncoder.encode(user.getPassword()), new ArrayList<>());
+	}
+
+}

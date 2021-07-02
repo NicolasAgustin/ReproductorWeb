@@ -15,7 +15,7 @@ public class ReprowebApplication {
 	}
 
 	@Bean
-	public CommandLineRunner onInit(CancionRepo crepo, FileManager fm){ 
+	public CommandLineRunner onInit(CancionRepo crepo, FileManager fm, UsuariosRepo urepo){ 
 		return (args) -> {
 
 			List<Cancion> lista = fm.makeCancionesArray();
@@ -23,6 +23,15 @@ public class ReprowebApplication {
 				System.out.println("Saved " + c.getRawTitulo());
 				crepo.save(c);
 			}
+
+			Usuario u = new Usuario();
+			u.setEmail("nickrak10@gmail.com");
+			u.setPassword("pass123");
+			u.setUsername("nicolas");
+
+			urepo.save(u);
+
+
 		};
 	}
 
