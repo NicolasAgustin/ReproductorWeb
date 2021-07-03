@@ -35,6 +35,7 @@ import { RegisterComponent } from './register/register.component';
 
 import { OverlayModule } from '@angular/cdk/overlay';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -45,7 +46,8 @@ import { JwtInterceptorService } from './jwt-interceptor.service';
     BarrabusquedaComponent,
     MusicControllerComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,

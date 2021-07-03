@@ -1,0 +1,32 @@
+
+mat-card{
+    text-align: center;
+    height: 200px;
+    background-color: rgb(30, 79, 153);
+}
+
+.tarjetas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo{
+    color: aliceblue;
+    text-align: center;
+    font-size: 20px;
+}
+
+.container{
+    padding: 20px;
+    width: 200px;
+}
+
+.control{
+    width: 75px;
+    height: auto;
+    margin: 15px;
+    padding: 10px;
+    background-color: aliceblue;
+}
+
