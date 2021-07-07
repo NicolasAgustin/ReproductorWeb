@@ -7,6 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { MatListOption } from '@angular/material/list';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-musiccontroller',
@@ -33,7 +34,7 @@ export class MusicControllerComponent implements OnInit {
   public totalTime: string;
   public listaOpciones: QueryList<MatListOption>;
 
-  constructor(private rcservice: ReqCancionesService, private sanitizer: DomSanitizer) {
+  constructor(private rcservice: ReqCancionesService, private sanitizer: DomSanitizer, private router: Router) {
     this.archivoUrl = '';
     this.audio = new Audio();
     this.imageUrl = '';
@@ -55,10 +56,11 @@ export class MusicControllerComponent implements OnInit {
       this.cantidadCanciones = data.length;
       console.log('cantidad de canciones: ' + this.cantidadCanciones);
     });
-
   }
 
   ngOnInit(): void {
+    const token = sessionStorage.getItem('token');
+    if(token === null) this.router.navigate(['badrequest']);
   }
 
   load(id: HTMLInputElement){

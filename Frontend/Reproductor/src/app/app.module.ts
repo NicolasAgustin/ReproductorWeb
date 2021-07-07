@@ -36,6 +36,8 @@ import { RegisterComponent } from './register/register.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { JwtInterceptorService } from './jwt-interceptor.service';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { PrincipalComponent } from './principal/principal.component';
+import { BadrequestComponent } from './badrequest/badrequest.component';
 
 // import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -47,7 +49,9 @@ import { TutorialComponent } from './tutorial/tutorial.component';
     MusicControllerComponent,
     LoginComponent,
     RegisterComponent,
-    TutorialComponent
+    TutorialComponent,
+    PrincipalComponent,
+    BadrequestComponent
   ],
   imports: [
     BrowserModule,

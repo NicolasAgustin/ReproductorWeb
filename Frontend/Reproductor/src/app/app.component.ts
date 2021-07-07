@@ -7,7 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Reproductor';
+  public error: boolean;
   constructor(){
+    this.error = false;
     sessionStorage.clear();
   }
+
+  badReqHandler(){
+    this.error = true;
+  }
+
 }
+
+

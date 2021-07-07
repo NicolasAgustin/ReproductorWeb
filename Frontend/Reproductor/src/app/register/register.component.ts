@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
         console.log('token obtenida: ' + response.token);
         // this.auth.setToken(response.token);
         sessionStorage.setItem('token', response.token);
-        this.router.navigate(['player']);
+        this.router.navigate(['principal']);
       }
     });
 

@@ -1,0 +1,21 @@
+.texto{
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    margin: 5px;
+}
+
+.numero{
+    font-size: 200px;
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Fredoka One', cursive;
+    margin: 0%;
+}
+
+.imagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

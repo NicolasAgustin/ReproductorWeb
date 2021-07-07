@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           console.log(response);
           if(typeof response.token != 'undefined'){
             sessionStorage.setItem('token', response.token);
-            this.router.navigate(['player']);
+            this.router.navigate(['principal']);
           }
         }, (error) => {
           console.log(error);

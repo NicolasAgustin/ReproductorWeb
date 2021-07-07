@@ -7,8 +7,19 @@ mat-card {
     background-color: rgb(30, 79, 153);
 }
 
-.text{
+.boton{
+    background-color: rgba(14, 32, 58, 0.198);
+    margin: 5px
+}
+
+.text-boton{
     color:aliceblue;
+    margin: 0px;
+}
+
+.text{
+    color: aliceblue;
+    margin: 5px;
 }
 
 mat-form-field {
