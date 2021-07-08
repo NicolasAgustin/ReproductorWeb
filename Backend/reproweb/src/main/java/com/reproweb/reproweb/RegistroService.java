@@ -9,6 +9,9 @@ public class RegistroService {
     @Autowired
     private UsuariosRepo urepo;
 
+    /**
+     * Intento guardar un usuario en la base de datos
+     */
     boolean saveUser(Usuario newUser){
         try{
             urepo.save(newUser);

@@ -10,11 +10,11 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Canciones")
+@Table(name = "Canciones")
 public class Cancion {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
     private String rawTitulo;
     private String path;

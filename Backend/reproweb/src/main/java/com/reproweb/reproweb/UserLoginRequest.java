@@ -11,5 +11,4 @@ public class UserLoginRequest {
         this.email = email;
         this.password = pass;
     }
-
 }

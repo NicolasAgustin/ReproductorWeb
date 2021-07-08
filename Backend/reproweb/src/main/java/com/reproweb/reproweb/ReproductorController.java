@@ -58,6 +58,13 @@ public class ReproductorController {
         }
     }
 
+    /**
+     * En base al id de una cancion, obtengo el path absoluto de la base de datos, con el path obtengo el archivo desde el filesystem local
+     * y retorno todos los bytes del archivo.
+     * @param id
+     * @return
+     * @throws IOException
+     */
     @GetMapping(value = "/getFile/{id}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] getFile(@PathVariable("id") Long id) throws IOException {
         InputStream in = null;
@@ -75,6 +82,15 @@ public class ReproductorController {
         }
     }
 
+    /**
+     * En base a un id de cancion, obtengo el path absoluto de la base de datos, con el path leo el archivo y extraigo los tags
+     * en busca de el cover de la cancion. Extraigo la cancion y retorno los bytes
+     * @param id
+     * @return
+     * @throws IOException
+     * @throws UnsupportedTagException
+     * @throws InvalidDataException
+     */
     @GetMapping(value = "/getFile/meta/{id}", produces = {MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE})
     public @ResponseBody byte[] getMetadata(@PathVariable("id") Long id) throws IOException, UnsupportedTagException, InvalidDataException {
         System.out.println("Metodo para obetener metadata");
@@ -93,6 +109,11 @@ public class ReproductorController {
         return imageData;
     }
 
+    /**
+     * En base a un id, obtengo una cancion especifica
+     * @param id
+     * @return
+     */
     @GetMapping("/getSong/{id}")
     public Cancion getSongById(@PathVariable("id") Long id){
         Optional<Cancion> result = rservice.getSongById(id);
