@@ -1,6 +1,7 @@
-Reproductor web Angular
-Authors: Nicolas Agustin Sandez
-         Matias Ghersevich
+#Reproductor web Angular
+#Authors: 
+Nicolas Agustin Sandez
+Matias Ghersevich
 
 # ReproductorWeb
 Run angular app with:
