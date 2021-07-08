@@ -19,6 +19,8 @@ export class TutorialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Al inicio de la aplicacion, chequeo si el token en la cache el null
+    // Si no hay token presente, se muestra el componente badrequest
     const token = sessionStorage.getItem('token');
     if(token === null) this.router.navigate(['badrequest']);
   }
@@ -30,11 +32,6 @@ export class TutorialComponent implements OnInit {
   changeState(){
     this.playing = !this.playing;
     if(this.playing) this.titulo = "Pausa la canción en reproducción"; else this.titulo = "Reanuda la canción en reproducción";
-    // if (this.playing){
-    //   this.playing = false;
-    // }  else {
-    //   this.playing = true;
-    // }
   }
 
 }

@@ -24,24 +24,6 @@ mat-form-field {
     display: block;
 }
 
-/* ::ng-deep .mat-form-field {
-    .mat-input-element {
-        color: slategray;
-    }
-    .mat-form-field-label {
-        color: slategray;
-    }
-    .mat-form-field-underline {
-        background-color: slategray;
-    }
-    .mat-form-field-ripple {
-        background-color: slategray;
-    }
-    .mat-form-field-required-marker {
-        color: slategray;
-    }
-} */
-
 ::ng-deep .mat-form-field .mat-form-field-label {
     color: white;
     font-size: 15px;

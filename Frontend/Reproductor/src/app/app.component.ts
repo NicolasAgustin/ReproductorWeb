@@ -10,6 +10,7 @@ export class AppComponent {
   public error: boolean;
   constructor(){
     this.error = false;
+    // Se limpia la cache del navegador
     sessionStorage.clear();
   }
 

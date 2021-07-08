@@ -11,71 +11,69 @@ import { ReqCancionesService } from '../req-canciones.service';
 })
 export class ListaCancionesComponent implements OnInit, AfterViewInit {
 
+  // Obtengo el componente hijo con id 'cancionesLista'
   @ViewChild('cancionesLista', { static: true }) seleccion!: MatSelectionList;
 
   ngAfterViewInit(){}
 
+  // Evento cuando se clikea una cancion de la lista
   @Output()
   clickedSong: EventEmitter<number> = new EventEmitter<number>();
-  @Output()
-  listaOpciones: EventEmitter<QueryList<MatListOption>>;
-  public evento: EventEmitter<MatSelectionListChange> = new EventEmitter<MatSelectionListChange>();
 
-  canciones: Cancion[];
-  mostrado = false;
+  
+  // public evento: EventEmitter<MatSelectionListChange> = new EventEmitter<MatSelectionListChange>(); para revisar
+  // Lista de canciones
+  public canciones: Cancion[];
+  // public mostrado = false;
+
+  // Observable del componente padre para sombrear la cancion que se esta reproduciendo
   @Input()
   public focusOnSelect$: Subject<number>;
-  obs$: Subscription;
+
+  // Observable para actualizar la lista de canciones
+  public obs$: Subscription;
 
   constructor(private rcservice: ReqCancionesService) {
     this.canciones = [];
     this.obs$ = new Subscription();
     this.focusOnSelect$ = new Subject();
-    this.listaOpciones = new EventEmitter<QueryList<MatListOption>>();
   }
 
   ngOnInit(): void {
+
     this.obtenerLista();
     this.obs$ = this.rcservice.refresh$.subscribe( () => {
       this.obtenerLista();
     });
 
     this.focusOnSelect$.subscribe((option: number, ) => {
+      // option: id de la cancion
+
+      // Obtengo la opcion del MatSelectionList
       let qOptList = this.seleccion.options.get(option);
+
+      // Si la se pudo obtener las opciones, las sombreo
       if(typeof qOptList != 'undefined') this.seleccion.selectedOptions.select(qOptList);
     });
 
   }
 
-  update(){
-    this.rcservice.updateList();
-  }
-
+  /**
+   * Descripcion: metodo para seleccionar la cancion de la lista
+   * id: id de la cancion seleccionada
+   */
   onSelect(id: string){
-    console.log('En metodo cancionClickeada');
+    // Se emite un evento al componente padre
     this.clickedSong.emit(Number(id));
   }
 
+  /**
+   * Descripcion: Metodo para obtener la lista de canciones desde el backend
+   */
   obtenerLista() {
     this.rcservice.obtenerCanciones().subscribe( (datos: any) => {
-      this.canciones = datos;
-      console.log('Updated list');      
+      this.canciones = datos;    
     });
   }
-
-  mouseHover(marquee: HTMLMarqueeElement){
-    marquee.setAttribute('scrollamount', '5');
-  }
-
-  mouseOut(marquee: HTMLMarqueeElement){
-    // console.log('hola');
-    // marquee.loop = 1;
-    // marquee.onfinish((elemento, evento) => {
-    //   elemento.stop();
-    // });
-    // marquee.setAttribute('scrollamount', '0');
-    // marquee.start();
-  }
-
 
 }

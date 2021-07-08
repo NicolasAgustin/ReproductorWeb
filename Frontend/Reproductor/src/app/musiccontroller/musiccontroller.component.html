@@ -1,28 +1,36 @@
 <mat-card>
     <mat-card-title>
+        <!-- BARRA DE BUSQUEDA -->
+        <!-- Barra de busqueda emite cancionSeleccionada (id de la cancion) -->
         <app-barrabusqueda (cancionSeleccionada)="seleccionarCancion($event)"></app-barrabusqueda>
     </mat-card-title>
     <mat-card-content style="margin-bottom: 5px;">
         <mat-divider [inset]="true"></mat-divider> 
         <div fxLayout="row">
+            <!-- LISTA DE CANCIONES -->
             <div>
+                <!-- lista de canciones, emite clickedSong (id de la cancion clickeada) -->
+                <!-- Este componente le envia al hijo listacanciones el observable focusOnSelect para poder determinar la cancion que se
+                    va a sombrear (la actual)
+                -->
                 <app-lista-canciones (clickedSong)="seleccionarCancion($event)" [focusOnSelect$]="selected$"></app-lista-canciones>
             </div>
-
+            <!-- COVER DE LA CANCION -->
             <div class="albumart-div">
                 <span class="helper"></span>
                 <img [src]="imageUrl" class="albumart">
             </div>
         </div>
-        
         <mat-divider [inset]="true"></mat-divider> 
     </mat-card-content>
     <mat-card-actions>
+        <!-- TITULO DE LA CANCION QUE SE SELECCIONO -->
         <mat-card-title>
             <div class="tituloSeleccionado">
                 <p class="tituloCancion">{{titulo}}</p>
             </div>
         </mat-card-title>
+        <!-- BARRA DE PROGRESO -->
         <div class="progressbar-div" fxLayout="row" fxLayoutAlign="center">
             <p class="left">{{timeStatus}}</p>
             <mat-slider min="0" [max]="audio.duration" step="0.01" [value]="audio.currentTime" class="progressbar" (input)="updateTime($event)"></mat-slider>
@@ -30,12 +38,18 @@
         </div>
         <!-- CONTROLES -->
         <div fxLayout="row" fxLayoutAlign="center" class="controles">
+            
+            <button mat-fab (click)="goBack()" class="control">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+           
             <button mat-fab (click)="stop()" class="control">
                 <mat-icon>stop</mat-icon>
             </button>
             <button mat-fab (click)="previousSong()" class="control">
                 <mat-icon>skip_previous</mat-icon>
             </button>
+            <!-- Cuando se clickea el boton play, se alterna el estado y el icono  -->
             <button mat-fab (click)="changeState()" class="control">
                 <mat-icon *ngIf="!playing">play_arrow</mat-icon>
                 <mat-icon *ngIf="playing">pause</mat-icon>
@@ -43,7 +57,6 @@
             <button mat-fab (click)="nextSong()" class="control">
                 <mat-icon>skip_next</mat-icon>
             </button>
-            <!-- llevar a archivo css -->
             <div style="padding: 20px">
                 <mat-slider max="1" step="0.01" value="0.50" class="volumeslider" (input)="changeVolume($event)"></mat-slider>
             </div>

@@ -1,3 +1,4 @@
+// Interface para manejar tipeo
 export interface Usuario {
     id: string,
     username: string,

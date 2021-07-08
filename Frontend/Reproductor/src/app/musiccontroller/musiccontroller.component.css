@@ -59,8 +59,6 @@
     height: auto;
     width: auto;
     overflow: hidden;
-    /* color: rgb(156, 50, 255); */
-    /* text-align: center; */
 }
 
 #bar{
@@ -100,11 +98,6 @@ mat-card{
 mat-card-title{
     text-align: center;
 }
-
-.control{
-    padding: 5px 5px 5px 5px;
-}
-
 
 .volumeslider{
     width: 300px;

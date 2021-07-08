@@ -23,10 +23,18 @@ export class AuthService {
     this.token = token;
   }
 
+  /**
+   * Descripcion: envia una solicitud http al backend con el verbo POST
+   * newUser: nuevo usuario a registrarse
+   */
   public registerUser(newUser: Usuario): Observable<any> {
     return this.http.post<any>(this.registerUrl, newUser);
   }
 
+  /**
+   * Descripcion: intenta logear un usuario
+   * user: usuario a logear en el sistema
+   */
   public loginUser(user: {email: string, password: string}): Observable<any> {
     return this.http.post<any>(this.loginUrl, user);
   }

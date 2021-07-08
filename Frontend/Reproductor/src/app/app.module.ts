@@ -39,8 +39,6 @@ import { TutorialComponent } from './tutorial/tutorial.component';
 import { PrincipalComponent } from './principal/principal.component';
 import { BadrequestComponent } from './badrequest/badrequest.component';
 
-// import { FlexLayoutModule } from '@angular/flex-layout';
-
 @NgModule({
   declarations: [
     AppComponent,
